@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc:
   equatable:
   get:
+  provider: 
 
 dev_dependencies:
   flutter_test:

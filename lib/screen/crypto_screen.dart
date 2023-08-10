@@ -1,4 +1,5 @@
 import 'package:filterlistbloc/getxcontroller/crypto_controller.dart';
+import 'package:filterlistbloc/screen/company_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,6 +49,12 @@ class _CryptoScreenState extends State<CryptoScreen> {
               ),
             );
           },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const CompanyScreen()),
+          ),
+          child: const Icon(Icons.arrow_forward),
         ),
       ),
     );
