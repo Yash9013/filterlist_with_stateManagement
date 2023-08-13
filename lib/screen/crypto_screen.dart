@@ -36,19 +36,30 @@ class _CryptoScreenState extends State<CryptoScreen> {
                 ))
           ],
         ),
-        body: ListView.builder(
-          itemCount: controller.cryptoList.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            final crypto = controller.cryptoList[index];
-            return ListTile(
-              title: Text(crypto['name']),
-              trailing: Text(
-                '\$${crypto['price'].toString()}',
-                style: const TextStyle(fontSize: 16),
-              ),
-            );
-          },
+        body: Column(
+          children: [
+            ListView.builder(
+              itemCount: controller.cryptoList.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final crypto = controller.cryptoList[index];
+                return ListTile(
+                  title: Text(crypto['name']),
+                  trailing: Text(
+                    '\$${crypto['price'].toString()}',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Getx',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.of(context).push(

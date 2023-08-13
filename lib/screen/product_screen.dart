@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:filterlistbloc/bloc/list_bloc.dart';
 import 'package:filterlistbloc/bloc/list_event.dart';
 import 'package:filterlistbloc/bloc/list_state.dart';
@@ -15,7 +14,6 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-
   late ListBloc listBloc;
 
   @override
@@ -27,7 +25,6 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     log('====BUILD====');
-
     return Scaffold(
       appBar: AppBar(
         title:
@@ -46,28 +43,39 @@ class _ProductScreenState extends State<ProductScreen> {
               ))
         ],
       ),
-      body: BlocBuilder<ListBloc, ListState>(
-        builder: (context, state) {
-          if (state is ListShowState) {
-            return ListView.builder(
-              itemCount: state.productList.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                final product = state.productList[index];
-                return ListTile(
-                  title: Text(product['name']),
-                  trailing: Text(
-                    '\$${product['price'].toString()}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
+      body: Column(
+        children: [
+          BlocBuilder<ListBloc, ListState>(
+            builder: (context, state) {
+              if (state is ListShowState) {
+                return ListView.builder(
+                  itemCount: state.productList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final product = state.productList[index];
+                    return ListTile(
+                      title: Text(product['name']),
+                      trailing: Text(
+                        '\$${product['price'].toString()}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    );
+                  },
                 );
-              },
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            'Bloc',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).push(
@@ -84,7 +92,7 @@ class _ProductScreenState extends State<ProductScreen> {
       builder: (context) {
         return Center(
           child: SizedBox(
-            height: MediaQuery.sizeOf(context).height*0.35,
+            height: MediaQuery.sizeOf(context).height * 0.35,
             child: Dialog(
               child: ListView.builder(
                 itemCount: listBloc.filterNameList.length,
